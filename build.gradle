@@ -8,6 +8,7 @@ buildscript{
         mavenCentral()
     }
     dependencies {
+        classpath ('com.google.cloud.tools:appengine-gradle-plugin:2.4.3')
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("io.spring.gradle:dependency-management-plugin:${springBootdependency}")
     }
@@ -58,6 +59,7 @@ dependencies {
     implementation files ('libs/ojdbc8-12.2.0.1.jar')
     annotationProcessor ("org.projectlombok:lombok:1.18.20")
     developmentOnly ("org.springframework.boot:spring-boot-devtools")
+    implementation 'org.springframework.kafka:spring-kafka'
     compileOnly ("org.projectlombok:lombok:1.18.20")
     testImplementation ("org.springframework.boot:spring-boot-starter-test")
 

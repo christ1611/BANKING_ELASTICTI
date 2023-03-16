@@ -14,6 +14,7 @@ import com.transfer.util.RestTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
@@ -29,14 +30,15 @@ public class DepositService {
     @Autowired public DaoCustBal daoCustBal;
     @Autowired public DaoApiMsgHis daoApiMsgHis;
     private final RestTemplate restTemplate;
-
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
     public BalCheckOutput balCheck(BalCheckInput input) throws URISyntaxException {
         BalCheckOutput output = new BalCheckOutput();
         Long refNo =  insertApiMsgHis("balCheck", input.getAcctNo(), LocalDateTime.now(), input.toString());
 
         output.setAcctNo(input.getAcctNo());
         output.setDateTime(LocalDateTime.now());
-
+        kafkaTemplate.send("TEST KAFKA","KAFKA BALANCE");
         try {
             CustBal bal = daoCustBal.getBal(input.getAcctNo());
             output.setBal(bal.getBal());
