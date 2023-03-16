@@ -29,6 +29,17 @@ public class SwaggerConfig {
                 .addOperationCustomizer(customGlobalHeaders())
                 .build();
     }
+
+    @Bean
+    public OpenAPI apiInfo() {
+        return new OpenAPI()
+//                .components(new Components()
+//                        .addParameters("sysinfo.user_id", new Parameter().in(ParameterIn.HEADER.toString()).name("sysinfo.user_id").schema(new StringSchema())))
+                .info(new Info().title("elasticBank")
+                        .description("elasticBank")
+                        .version("1.0")
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")));
+    }
     @Bean
     public OperationCustomizer customGlobalHeaders()
     {
