@@ -38,7 +38,7 @@ public class DepositService {
 
         output.setAcctNo(input.getAcctNo());
         output.setDateTime(LocalDateTime.now());
-        kafkaTemplate.send("TEST KAFKA","KAFKA BALANCE");
+        kafkaTemplate.send("elastic","KAFKA BALANCE");
         try {
             CustBal bal = daoCustBal.getBal(input.getAcctNo());
             output.setBal(bal.getBal());
