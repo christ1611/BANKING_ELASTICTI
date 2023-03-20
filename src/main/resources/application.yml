@@ -39,7 +39,7 @@ spring:
   cloud:
     zookeeper:
       discovery:
-        enabled: false
+        enabled: true
       connect-string: 35.226.168.81:2181
   kafka:
     bootstrap:
