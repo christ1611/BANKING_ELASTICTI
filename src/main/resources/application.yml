@@ -40,7 +40,7 @@ spring:
     zookeeper:
       discovery:
         enabled: true
-      connect-string: 35.226.168.81:2181
+      connect-string: localhost:2181
   kafka:
     bootstrap:
       server: 35.226.168.81:9094
