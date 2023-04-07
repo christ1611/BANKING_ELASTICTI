@@ -1,15 +1,15 @@
 package com.transfer;
 
-import com.transfer.model.BalCheckInput;
-import com.transfer.model.CheckHisInput;
-import com.transfer.model.TrscConfirmInput;
-import com.transfer.model.TrscReqInput;
+import com.transfer.model.*;
 import com.transfer.module.CommonResponse;
 import com.transfer.service.DepositService;
 
+import com.transfer.service.RegistrationService;
 import com.transfer.service.SchedulerService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +21,19 @@ import java.net.URISyntaxException;
 @RequestMapping("/trnf")
 public class TransferController {
     private final DepositService depositService;
+    private final RegistrationService registrationService;
     private final SchedulerService schedulerService;
+
+
+    @PostMapping("/UserReg")
+    @Operation(summary="Check Balance", description="Check Balance")
+    public ResponseEntity<?> userReg(@RequestBody @Valid UserRegInput userRegInput) throws URISyntaxException {
+
+        CommonResponse<Object> commonResponseDto = CommonResponse.builder()
+                .status(CommonResponse.ResponseStatus.OK)
+                .output(registrationService.userReg(userRegInput)).build();
+        return ResponseEntity.ok(commonResponseDto);
+    }
 
     @PostMapping("/BalCheck")
     @Operation(summary="Check Balance", description="Check Balance")

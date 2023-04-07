@@ -14,4 +14,9 @@ public interface DaoCustBase extends JpaRepository<CustBase, CustBasePk> {
             , nativeQuery = true
     )
     public String getUuid(@Param("acctNo") Long acctNo);
+    @Query(value =
+            " SELECT max(ACCT_NO) FROM CUST_BASE"
+            , nativeQuery = true
+    )
+    public Long getMaxAcctNo();
 }
