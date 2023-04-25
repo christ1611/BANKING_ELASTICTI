@@ -25,6 +25,8 @@ spring:
     console:
       enabled: true
       path: /h2-console
+      settings:
+        web-allow-others: true
   endpoints:
     actuator:
       enabled: true
@@ -39,7 +41,7 @@ spring:
   cloud:
     zookeeper:
       discovery:
-        enabled: false
+        enabled: true
       connect-string: 35.226.168.81:2181
   kafka:
     bootstrap:
@@ -52,7 +54,9 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
+logging:
+  level:
+    org.apache.zookeeper.ClientCnxn: WARN
 kafka:
   bootstrap:
     server: 35.226.168.81:9094
